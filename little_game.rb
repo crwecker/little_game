@@ -24,9 +24,9 @@ Thread.new do
 
 		##Change Name
 			#"rename"
-		if prompt =~ /^\s*rename\s+(\w+)/i
+		if prompt =~ /^\s*rename/i
 			name = $1
-			$command = Proc.new{ $robot.rename(name) }
+			$command = Proc.new{ $robot.rename }
 
 		#Exit game
 		#"exit"

@@ -10,10 +10,12 @@ class Robot
 	def name( name )
 		puts "What now would you like to be called?"
 		print ">"
-		name = $>.gets.chomp
+		name = $<.gets.chomp
 		@name = name
 		puts "Game on, bro!"
 	end
+
+	attr_reader :name
 
 end
 

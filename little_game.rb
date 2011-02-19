@@ -11,33 +11,31 @@ require 'robot.rb'
 
 $robot = Robot.new
 $running = true
-$prompt = nil
+prompt = nil
 
 #######################################
 ## Command line and commands
+while true
+	$>.flush
+	print $robot.name + " >"
+ 	$>.flush
+ 	prompt = $<.gets
 
-Thread.new do
-	while true
-		$>.flush
-		print $robot.name + " >"
-		$>.flush
-		$prompt = STDIN.gets
+ 	##Change Name
+ 		#"rename"
+ 	if prompt =~ /^\s*rename\s+(\w+)/i
+ 		$command = Proc.new{ $robot.name }
 
-		##Change Name
-			#"rename"
-		if $prompt =~ /^\s*rename\s+(\w+)/i
-			$command = Proc.new{ $robot.name }
-
-		#Exit game
-		#"exit"
-		elsif $prompt =~ /^\s*exit/i
-			$command = Proc.new{ $running = false }
-		else
-			$command = Proc.new{ puts "huh? Sorry, I don't know what #{$prompt} means!" }
-		
-		end
+ 	#Exit game
+ 	#"exit"
+ 	elsif prompt =~ /^\s*exit/i
+ 		$command = Proc.new{ $running = false }
+ 	else
+ 		$command = Proc.new{ puts "huh? Sorry, I don't know what #{prompt} means!" }
+ 	
 	end
 end
+
 
 while $running
 	start_time = Time.now

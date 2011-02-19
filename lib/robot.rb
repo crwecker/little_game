@@ -10,7 +10,7 @@ class Robot
 	def rename
 		puts "What now would you like to be called?"
 		print ">"
-		name = $<.gets.chomp
+		name = STDIN.gets.chomp
 		@name = name
 		puts "Game on, bro!"
 	end

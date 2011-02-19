@@ -15,7 +15,7 @@ prompt = nil
 
 #######################################
 ## Command line and commands
-Thread.new do
+#Thread.new do
 	while true
 		$>.flush
 		print $robot.name + " >"
@@ -25,27 +25,33 @@ Thread.new do
 		##Change Name
 			#"rename"
 		if prompt =~ /^\s*rename/i
-			name = $1
 			$command = Proc.new{ $robot.rename }
+
+		elsif prompt =~  /^\s*get_name/i
+			$command = Proc.new{ puts "Why, you are #{$robot.name}"}
+
 
 		#Exit game
 		#"exit"
 		elsif prompt =~ /^\s*exit/i
-			$command = Proc.new{ $running = false }
+			#$command = Proc.new{ $running = false }
+			return nil
+			
 		else
 			$command = Proc.new{ puts "huh? Sorry, I don't know what #{prompt} means!" }
-		
+		end		
+		#if $running
+		#	start_time = Time.now
+		#	puts "start_time: #{start_time}"	#Debug
+		if !$command.nil?
+			$command.call
+			$command = nil
 		end
-	end
-end
+		#	left_over_time = (1 - (Time.now - start_time))
+		#	puts "left over time: #{left_over_time}"	#Debug
 
-while $running
-	start_time = Time.now
-	if !$command.nil?
-		$command.call
-		$command = nil
+		#	sleep(left_over_time)
+		#end
+
 	end
-	left_over_time = (0.1 - (Time.now - start_time))
-	sleep(left_over_time)
-end
- 
+#end

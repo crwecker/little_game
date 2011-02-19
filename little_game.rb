@@ -35,8 +35,7 @@ prompt = nil
 		#"exit"
 		elsif prompt =~ /^\s*exit/i
 			#$command = Proc.new{ $running = false }
-			return nil
-			
+			break	
 		else
 			$command = Proc.new{ puts "huh? Sorry, I don't know what #{prompt} means!" }
 		end		
